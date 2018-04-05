@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Illuminate\Http\Response;
 use App\Contacts;
 use Validator;
 
@@ -78,7 +79,7 @@ class ContactsController extends Controller
             $contact->name   = $request->input('name');
             $contact->save();
 
-            return response()->json($contact);
+            return response()->json($contact,201);
         }
     }
 
