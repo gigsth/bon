@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Contacts;
+use App\Contact;
 use Validator;
 
 class ContactsController extends Controller
@@ -16,7 +16,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = Contacts::all();
+        $contacts = Contact::all();
         return response()->json($contacts, 200);
     }
 
@@ -38,7 +38,7 @@ class ContactsController extends Controller
             return response()->json($response ,400);
         } else {
             //Create contact
-            $contact = new Contacts;
+            $contact = new Contact;
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -55,7 +55,7 @@ class ContactsController extends Controller
      */
     public function show($id)
     {
-        $contact = Contacts::find($id);
+        $contact = Contact::find($id);
         return response()->json($contact, 200);
     }  
 
@@ -77,7 +77,7 @@ class ContactsController extends Controller
             return response()->json($response ,400);
         } else {
             //Update contact
-            $contact = Contacts::find($id);
+            $contact = Contact::find($id);
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -95,7 +95,7 @@ class ContactsController extends Controller
     public function destroy($id)
     {
         //Delete Contact
-        $contact = Contacts::find($id);
+        $contact = Contact::find($id);
         $contact->delete();
 
         $response = array('response' => 'Contact deleted', 'success' => true);
