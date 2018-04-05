@@ -43,7 +43,7 @@ class ContactsController extends Controller
             $contact->name   = $request->input('name');
             $contact->save();
 
-            return response()->json($contact, 200);
+            return response()->json($contact, 201);
         }
     }
 
