@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('api/contacts', 'ContactsController');
+
+// Route::name('admin.')->group(function () {
+//     Route::get('users', function () {
+//         return 'test';
+//     });
+// });
