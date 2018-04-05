@@ -53,9 +53,9 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($contact)
     {
-        $contact = Contact::find($id);
+        $contact = Contact::find($contact);
         return response()->json($contact, 200);
     }  
 
@@ -66,7 +66,7 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$contact)
     {
         $validator = Validator::make($request->all(),[
             'mobile' => 'required'
@@ -77,7 +77,7 @@ class ContactsController extends Controller
             return response()->json($response ,400);
         } else {
             //Update contact
-            $contact = Contact::find($id);
+            $contact = Contact::find($contact);
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -92,13 +92,12 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($contact)
     {
         //Delete Contact
-        $contact = Contact::find($id);
+        $contact = Contact::find($contact);
         $contact->delete();
 
-        $response = array('response' => 'Contact deleted', 'success' => true);
-        return response()->json($response ,204);
+        return response()->json(null ,204);
     }
 }
