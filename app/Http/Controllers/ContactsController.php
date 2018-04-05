@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\contacts;
+use App\Contacts;
 use Validator;
 
 class ContactsController extends Controller
@@ -15,7 +15,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = contacts::all();
+        $contacts = Contacts::all();
         return response()->json($contacts);
     }
 
@@ -36,7 +36,7 @@ class ContactsController extends Controller
             return $response;
         } else {
             //Create contact
-            $contact = new contacts;
+            $contact = new Contacts;
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -53,7 +53,7 @@ class ContactsController extends Controller
      */
     public function show($id)
     {
-        $contact = contacts::find($id);
+        $contact = Contacts::find($id);
         return response()->json($contact);
     }
 
@@ -73,7 +73,7 @@ class ContactsController extends Controller
             return $response;
         } else {
             //Create contact
-            $contact = new contacts;
+            $contact = new Contacts;
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -111,7 +111,7 @@ class ContactsController extends Controller
             return $response;
         } else {
             //Update contact
-            $contact = contacts::find($id);
+            $contact = Contacts::find($id);
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
             $contact->save();
@@ -129,7 +129,7 @@ class ContactsController extends Controller
     public function destroy($id)
     {
         //Delete Contact
-        $contact = contacts::find($id);
+        $contact = Contacts::find($id);
         $contact->delete();
 
         $response = array('response' => 'Contact deleted', 'success' => true);
