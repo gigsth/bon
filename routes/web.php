@@ -16,6 +16,10 @@ Route::get('/', function () {
 });
 
 Route::resource('api/contacts', 'ContactsController');
+Route::resource('api/users/{id}/contacts', 'UserContactsController');
+
+
+Route::resource('api/users', 'UserController');
 
 // Route::name('admin.')->group(function () {
 //     Route::get('users', function () {

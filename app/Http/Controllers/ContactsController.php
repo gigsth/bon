@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use App\Contact;
+use App\User;
 use Validator;
 
 class ContactsController extends Controller
@@ -20,6 +22,17 @@ class ContactsController extends Controller
         return response()->json($contacts, 200);
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($contact)
+    {
+        $user = Contact::find($contact);
+        return response()->json($user, 200);
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -41,23 +54,12 @@ class ContactsController extends Controller
             $contact = new Contact;
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
+            $contact->user_id= $request->input('user_id');
             $contact->save();
 
             return response()->json($contact, 201);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($contact)
-    {
-        $contact = Contact::find($contact);
-        return response()->json($contact, 200);
-    }  
+    }   
 
     /**
      * Update the specified resource in storage.
@@ -73,16 +75,17 @@ class ContactsController extends Controller
         ]);
 
         if($validator->fails()){
-            $response = array('response' => $validator->messages(), 'success' => false);
+            $response = array('response' => $request->all(), 'success' => false);
             return response()->json($response ,400);
         } else {
             //Update contact
-            $contact = Contact::find($contact);
-            $contact->mobile = $request->input('mobile');
-            $contact->name   = $request->input('name');
+            $contact         = Contact::find($contact);
+            $contact->mobile    = $request->input('mobile');
+            $contact->name      = $request->input('name');
+            $contact->user_id   = $request->input('user_id');
             $contact->save();
 
-            return response()->json($contact,200);
+            return response()->json($request->all(),200);
         }
     }
 
