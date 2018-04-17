@@ -29,13 +29,13 @@ class UserContactsController extends Controller
 
     public function store(Request $request, $user)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'mobile' => 'required'
         ]);
 
         if($validator->fails()){
             $response = array('response' => $validator->messages(), 'success' => false);
-            return response()->json($response ,400);
+            return response()->json($response, 400);
         } else {
             //Create contact
             $contact = new Contact;
@@ -66,7 +66,7 @@ class UserContactsController extends Controller
         } 
         else if($userContact->isEmpty()) {
             $response = array('response' => 'User or Contact not found', 'success'=>false);
-            return response()->json($response ,400);
+            return response()->json($response, 400);
         }
         else { 
             $contact         = Contact::find($contact);         

@@ -48,7 +48,7 @@ class ContactsController extends Controller
 
         if($validator->fails()){
             $response = array('response' => $validator->messages(), 'success' => false);
-            return response()->json($response ,400);
+            return response()->json($response, 400);
         } else {
             //Create contact
             $contact = new Contact;
@@ -76,7 +76,7 @@ class ContactsController extends Controller
 
         if($validator->fails()){
             $response = array('response' => $request->all(), 'success' => false);
-            return response()->json($response ,400);
+            return response()->json($response, 400);
         } else {
             //Update contact
             $contact         = Contact::find($contact);
@@ -85,7 +85,7 @@ class ContactsController extends Controller
             $contact->user_id   = $request->input('user_id');
             $contact->save();
 
-            return response()->json($request->all(),200);
+            return response()->json($request->all(), 200);
         }
     }
 
