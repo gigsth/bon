@@ -61,14 +61,17 @@ class UserContactsController extends Controller
                         ->get();
 
         if($validator->fails()) {
+            
             $response = array('response' => $validator->messages(), 'success' => false);
             return response()->json($response ,400);
         } 
         else if($userContact->isEmpty()) {
+
             $response = array('response' => 'User or Contact not found', 'success'=>false);
             return response()->json($response, 400);
         }
         else { 
+
             $contact         = Contact::find($contact);         
             $contact->mobile = $request->input('mobile');
             $contact->name   = $request->input('name');
