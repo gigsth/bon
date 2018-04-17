@@ -81,21 +81,12 @@ class UserContactsController extends Controller
 
     public function destroy($user, $contact)
     {
-        $userContact = DB::table('users')
-                        ->leftJoin('contacts', 'users.id', '=', 'contacts.user_id')
-                        ->where('users.id', $user)
-                        ->where('contacts.id', $contact)
-                        ->get();
-        if($userContact->isEmpty()) {
-            $response = array('response' => 'User or Contact not found', 'success'=>false);
-            return response()->json($response ,400);
-        }
-        else {                
-            //Delete Contact
-            $contact = Contact::find($contact);
-            $contact->delete();
+                   
+        //Delete Contact
+        $contact = Contact::find($contact);
+        $contact->delete();
 
-            return response()->json(null ,204);
-        }
+        return response()->json(null ,204);
+        
     }
 }
